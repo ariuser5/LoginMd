@@ -1,0 +1,34 @@
+
+
+CREATE DATABASE MyDB;
+USE MyDB;
+
+CREATE LOGIN loginmd
+	WITH PASSWORD = '123'
+GO
+
+CREATE USER loginmd FOR LOGIN loginmd
+ALTER ROLE db_owner ADD MEMBER loginmd;
+
+CREATE TABLE Roles
+(
+	id INT NOT NULL PRIMARY KEY IDENTITY,
+	name VARCHAR(32) NOT NULL
+);
+
+CREATE TABLE Users
+(
+	username VARCHAR(32) NOT NULL,
+	password VARCHAR(255) NOT NULL,
+	role INT NOT NULL,
+	PRIMARY KEY (username),
+	FOREIGN KEY (role) REFERENCES Roles(id)
+);
+
+
+INSERT INTO Roles(name) VALUES('admin');
+INSERT INTO Roles(name) VALUES('member');
+INSERT INTO Roles(name) VALUES('guest');
+
+INSERT INTO Users VALUES('adm', '123', 1);
+INSERT INTO Users VALUES('usr', '321', 2);
