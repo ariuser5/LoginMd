@@ -7,7 +7,7 @@ CREATE LOGIN loginmd
 	WITH PASSWORD = '123'
 GO
 
-CREATE USER mydb_usr FOR LOGIN loginmd
+CREATE USER loginmd FOR LOGIN loginmd
 ALTER ROLE db_owner ADD MEMBER loginmd;
 
 CREATE TABLE Roles
@@ -32,4 +32,3 @@ INSERT INTO Roles(name) VALUES('guest');
 
 INSERT INTO Users VALUES('adm', '123', 1);
 INSERT INTO Users VALUES('usr', '321', 2);
-
